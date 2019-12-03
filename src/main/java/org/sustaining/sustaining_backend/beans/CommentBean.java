@@ -7,7 +7,9 @@ package org.sustaining.sustaining_backend.beans;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import org.sustaining.sustaining_backend.ConnectionFactory;
 import org.sustaining.sustaining_backend.entities.Comment;
 
 /**
@@ -16,6 +18,9 @@ import org.sustaining.sustaining_backend.entities.Comment;
  */
 @Stateless
 public class CommentBean {
+    
+    @EJB
+    ConnectionFactory connectionFactory;
     
     public List<Comment> getComments(int imageID){
        return new ArrayList(); 

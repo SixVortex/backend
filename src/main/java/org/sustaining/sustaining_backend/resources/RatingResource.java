@@ -40,7 +40,7 @@ public class RatingResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @POST
     public Response postRating(Rating rating){
-        Rating createdRating = ratingBean.postRating(rating);
-        return Response.status(Response.Status.CREATED).entity(createdRating).build();
+        boolean success = ratingBean.postRating(rating);
+        return Response.status(Response.Status.CREATED).build();
     }
 }
