@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.sustaining.sustaining_backend.resources;
 
 import java.util.List;
@@ -18,10 +13,6 @@ import javax.ws.rs.core.Response;
 import org.sustaining.sustaining_backend.beans.ImageBean;
 import org.sustaining.sustaining_backend.entities.Image;
 
-/**
- *
- * @author Elev
- */
 @Path("")
 @Produces(MediaType.APPLICATION_JSON)
 public class ImageResource {

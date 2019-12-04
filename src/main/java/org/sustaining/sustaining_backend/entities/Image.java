@@ -1,25 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.sustaining.sustaining_backend.entities;
 
 import java.sql.Date;
 
-/**
- *
- * @author Elev
- */
 public class Image {
     private int id;
     private int userID;
     private Date date;
-    private int location;
+    private String location;
     private String image;
     private String title;
 
-    public Image(int id, int userID, Date date, int location, String image, String title) {
+    public Image(int id, int userID, Date date, String location, String image, String title) {
         this.id = id;
         this.userID = userID;
         this.date = date;
@@ -55,11 +46,11 @@ public class Image {
         this.date = date;
     }
 
-    public int getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(int location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
