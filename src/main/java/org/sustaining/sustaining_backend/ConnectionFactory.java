@@ -35,8 +35,7 @@ public class ConnectionFactory {
         }
         
         try{
-            //Sustaining is misspelled because the database is mispselled
-            return DriverManager.getConnection("jdbc:mysql://localhost/sustaning?user=root");
+            return DriverManager.getConnection("jdbc:mysql://94.46.140.3/sustain?user=sustain&password=CO7fdAQXMxytT7Pn");
         } catch(Exception ex){
             System.out.println("ConnectionFactory.getConnection: " + ex.getMessage());
             return null;
