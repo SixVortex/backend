@@ -5,9 +5,7 @@
  */
 package org.sustaining.sustaining_backend.beans;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import org.sustaining.sustaining_backend.ConnectionFactory;
 import org.sustaining.sustaining_backend.entities.Image;
 
 /**
@@ -16,9 +14,6 @@ import org.sustaining.sustaining_backend.entities.Image;
  */
 @Stateless
 public class ImageBean {
-    
-    @EJB
-    ConnectionFactory connectionFactory;
     
     public Image getImage(int imageID){
         return null;

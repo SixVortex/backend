@@ -19,9 +19,6 @@ import org.sustaining.sustaining_backend.entities.Comment;
 @Stateless
 public class CommentBean {
     
-    @EJB
-    ConnectionFactory connectionFactory;
-    
     public List<Comment> getComments(int imageID){
        return new ArrayList(); 
     }

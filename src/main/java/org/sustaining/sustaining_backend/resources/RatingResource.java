@@ -41,6 +41,6 @@ public class RatingResource {
     @POST
     public Response postRating(Rating rating){
         boolean success = ratingBean.postRating(rating);
-        return Response.status(Response.Status.CREATED).build();
+        return Response.status(success ? Response.Status.CREATED : Response.Status.BAD_REQUEST).build();
     }
 }

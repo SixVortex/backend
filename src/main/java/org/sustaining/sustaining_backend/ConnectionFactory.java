@@ -14,11 +14,11 @@ import javax.ejb.Singleton;
  *
  * @author Elev
  */
-@Singleton
 public class ConnectionFactory {
     
-    @PostConstruct
-    public void initialize(){
+    private static boolean initialized = false;
+    
+    public static void initialize(){
         try {
             // This is needed for some java Imlementations
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
@@ -27,7 +27,13 @@ public class ConnectionFactory {
         }
     }
     
-    public Connection getConnection(){
+    public static Connection getConnection(){
+        
+        if(!initialized){
+            initialize();
+            initialized = true;
+        }
+        
         try{
             //Sustaining is misspelled because the database is mispselled
             return DriverManager.getConnection("jdbc:mysql://localhost/sustaning?user=root");
