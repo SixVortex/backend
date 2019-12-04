@@ -46,4 +46,8 @@ public class CommentBean {
         }
         return new ArrayList();
     }
+    
+    public Comment postComment(Comment comment){
+        return null;
+    }
   }
