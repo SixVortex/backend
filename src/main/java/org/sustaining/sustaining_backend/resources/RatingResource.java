@@ -31,7 +31,7 @@ public class RatingResource {
     
     @Path("rating/{imageID}")
     @GET
-    public Response getRating(@PathParam("imageID") int imageID){
+    public Response getRatings(@PathParam("imageID") int imageID){
         List<Rating> imageRating = ratingBean.getRatings(imageID);
         return Response.status(Response.Status.OK).entity(imageRating).build();
     }

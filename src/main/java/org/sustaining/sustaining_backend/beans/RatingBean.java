@@ -26,6 +26,24 @@ import org.sustaining.sustaining_backend.entities.Rating;
 public class RatingBean {
     
     public List<Rating> getRatings(int imageID){
+        try(Connection connection = ConnectionFactory.getConnection()){
+            
+            String sql = "SELECT * FROM image_user_rating WHERE image_id=?";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, imageID);
+            
+            ResultSet result = stmt.executeQuery();
+            List<Rating> ratings = new ArrayList();
+            while(result.next()){
+                int score = result.getInt("score");
+                int userID = result.getInt("user_id");
+                ratings.add(new Rating(score, userID, imageID));
+            }
+            
+            return ratings;
+        } catch (Exception ex) {
+            
+        }
         return new ArrayList();
     }
     
