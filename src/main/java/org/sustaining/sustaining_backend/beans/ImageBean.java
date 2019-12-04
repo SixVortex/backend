@@ -17,7 +17,7 @@ import org.sustaining.sustaining_backend.entities.Image;
 
 /**
  *
- * @author Elev
+ * @author Lea
  */
 @Stateless
 public class ImageBean {
@@ -49,7 +49,7 @@ public class ImageBean {
 
     }
 
-    public Image getImage(int imageID) {
+    public Image getImage(int imageID){
         return null;
     }
 
