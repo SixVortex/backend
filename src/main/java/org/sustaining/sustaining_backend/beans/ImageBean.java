@@ -16,7 +16,7 @@ import org.sustaining.sustaining_backend.entities.Image;
 
 /**
  *
- * @author Elev
+ * @author Lea
  */
 @Stateless
 public class ImageBean {
@@ -35,7 +35,7 @@ public class ImageBean {
                    int title = result.getInt("title");
                    int location = result.getInt("location");
                    int image = result.getInt("image");
-                   
+                    
                }
                return images;
            } catch (Exception ex) {
