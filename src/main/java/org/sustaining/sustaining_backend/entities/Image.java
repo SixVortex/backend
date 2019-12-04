@@ -17,13 +17,15 @@ public class Image {
     private Date date;
     private int location;
     private String image;
+    private String title;
 
-    public Image(int id, int userID, Date date, int location, String image) {
+    public Image(int id, int userID, Date date, int location, String image, String title) {
         this.id = id;
         this.userID = userID;
         this.date = date;
         this.location = location;
         this.image = image;
+        this.title = title;
     }
 
     public Image() {
@@ -67,5 +69,13 @@ public class Image {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

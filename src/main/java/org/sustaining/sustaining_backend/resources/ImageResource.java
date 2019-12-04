@@ -5,6 +5,7 @@
  */
 package org.sustaining.sustaining_backend.resources;
 
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -27,6 +28,13 @@ public class ImageResource {
     
     @EJB
     ImageBean imageBean;
+    
+    @Path("images")
+    @GET
+    public Response getImages(){
+        List<Image> images = imageBean.getImages();
+        return Response.status(Response.Status.OK).entity(images).build();
+    }
     
     @Path("image/{imageID}")
     @GET
