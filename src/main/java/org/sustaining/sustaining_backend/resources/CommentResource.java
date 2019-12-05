@@ -36,11 +36,11 @@ public class CommentResource {
         return Response.ok().entity(imageComments).build();
     }
     
-    @Path("comment")
+    @Path("comment/{imageID}")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response postComment(Comment comment){
-        Comment createdComment = commentBean.postComment(comment);
+    public Response postComment(@PathParam("imageID") int imageID, Comment comment){
+        Comment createdComment = commentBean.postComment(imageID, comment);
         return Response.status(Response.Status.CREATED).entity(createdComment).build();
     }
 }

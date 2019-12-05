@@ -9,7 +9,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import org.sustaining.sustaining_backend.ConnectionFactory;
 import org.sustaining.sustaining_backend.entities.Comment;
-import org.sustaining.sustaining_backend.entities.Rating;
 
 /**
  *
@@ -42,17 +41,19 @@ public class CommentBean {
         return new ArrayList();
     }
 
-    public Comment postComment(Comment comment) {
+    public Comment postComment(int imageID, Comment comment) {
         try ( Connection connection = ConnectionFactory.getConnection()) {
-            PreparedStatement stmt = connection.prepareStatement("INSERT INTO comment (user_id, text, date) VALUES(?, ?, ?)");
-            stmt.setInt(1, comment.getUserID());
-            stmt.setString(2, comment.getText());
-            stmt.setDate(3, comment.getDate());
+            PreparedStatement stmt = connection.prepareStatement("INSERT INTO comment (image_id, user_id, text, date) VALUES(?, ?, ?, ?)");
+            stmt.setInt(1, imageID);
+            stmt.setInt(2, comment.getUserID());
+            stmt.setString(3, comment.getText());
+            stmt.setDate(4, comment.getDate());
             if (stmt.executeUpdate() > 0) {
-                String sql = "SELECT LATEST_INSERT_ID()";
-                ResultSet data = stmt.executeQuery(sql);
+                String sql = "SELECT LAST_INSERT_ID()";
+                ResultSet data = connection.createStatement().executeQuery(sql);
                 if (data.next()) {
                     comment.setId(data.getInt(1));
+                    comment.setImageID(imageID);
                     return comment;
                 }
             }
