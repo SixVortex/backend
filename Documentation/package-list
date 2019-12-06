@@ -1,0 +1,5 @@
+org.sustaining.sustaining_backend
+org.sustaining.sustaining_backend.beans
+org.sustaining.sustaining_backend.entities
+org.sustaining.sustaining_backend.filters
+org.sustaining.sustaining_backend.resources
