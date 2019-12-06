@@ -72,6 +72,74 @@ public class PostBean {
         }
     }
 
+    public Response getFamePosts(int numberOfPosts){
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM fame_image LIMIT ?");
+            stmt.setInt(1, numberOfPosts);
+            ResultSet data = stmt.executeQuery();
+
+            List<Post> posts = new ArrayList();
+
+            while (data.next()) {
+                int imageID = data.getInt("image_id");
+                int userID = data.getInt("user_id");
+                String user = data.getString("user");
+                Date date = data.getDate("date");
+                String title = data.getString("title");
+                String location = data.getString("location");
+                String imageData = data.getString("image");
+                int rating = data.getInt("rating");
+                int fameCount = data.getInt("fame_count");
+                int shameCount = data.getInt("shame_count");
+
+                List<Comment> comments = commentBean.getComments(imageID);
+
+                Image postImage = new Image(imageID, userID, date, location, imageData, title, rating, user, fameCount, shameCount);
+
+                posts.add(new Post(postImage, comments));
+            }
+
+            return Response.status(Response.Status.OK).entity(posts).build();
+        } catch (Exception ex) {
+            System.out.println("PostBean.getFamePosts: " + ex.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
+    public Response getShamePosts(int numberOfPosts){
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM shame_image LIMIT ?");
+            stmt.setInt(1, numberOfPosts);
+            ResultSet data = stmt.executeQuery();
+
+            List<Post> posts = new ArrayList();
+
+            while (data.next()) {
+                int imageID = data.getInt("image_id");
+                int userID = data.getInt("user_id");
+                String user = data.getString("user");
+                Date date = data.getDate("date");
+                String title = data.getString("title");
+                String location = data.getString("location");
+                String imageData = data.getString("image");
+                int rating = data.getInt("rating");
+                int fameCount = data.getInt("fame_count");
+                int shameCount = data.getInt("shame_count");
+
+                List<Comment> comments = commentBean.getComments(imageID);
+
+                Image postImage = new Image(imageID, userID, date, location, imageData, title, rating, user, fameCount, shameCount);
+
+                posts.add(new Post(postImage, comments));
+            }
+
+            return Response.status(Response.Status.OK).entity(posts).build();
+        } catch (Exception ex) {
+            System.out.println("PostBean.getShamePosts: " + ex.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
     /**
      * Gets the next post based on the last image you received.
      * @param lastImageID The id of the last image you receieved.
@@ -103,7 +171,7 @@ public class PostBean {
             return Response.status(Response.Status.OK).entity(post).build();
 
         } catch (Exception e) {
-            System.out.println("PostBean.getPost: " + e.getMessage());
+            System.out.println("PostBean.getNextPost: " + e.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
     }

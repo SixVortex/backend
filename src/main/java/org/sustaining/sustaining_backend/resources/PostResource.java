@@ -26,13 +26,25 @@ public class PostResource {
     PostBean postBean;
     
     @GET
-    @Path("posts/{numberOfPosts}")
+    @Path("posts/all/{numberOfPosts}")
     /**
      * This function is automatically called by the server when a GET request is sent to
      * the specified Path. It parses the amoun of posts to get and returns them in a Response.
      */
     public Response getPosts(@PathParam("numberOfPosts") int numberOfPosts){
         return postBean.getPosts(numberOfPosts);
+    }
+    
+    @GET
+    @Path("posts/fame/{numberOfPosts}")
+    public Response getFamePosts(@PathParam("numberOfPosts") int numberOfPosts){
+        return postBean.getFamePosts(numberOfPosts);
+    }
+    
+    @GET
+    @Path("posts/shame/{numberOfPosts}")
+    public Response getShamePosts(@PathParam("numberOfPosts") int numberOfPosts){
+        return postBean.getShamePosts(numberOfPosts);
     }
     
     @GET
