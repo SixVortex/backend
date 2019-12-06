@@ -13,6 +13,10 @@ import javax.ws.rs.core.Response;
 import org.sustaining.sustaining_backend.beans.ImageBean;
 import org.sustaining.sustaining_backend.entities.Image;
 
+/**
+ * This class contains all the resources for images.
+ * @author Adrian
+ */
 @Path("")
 @Produces(MediaType.APPLICATION_JSON)
 public class ImageResource {

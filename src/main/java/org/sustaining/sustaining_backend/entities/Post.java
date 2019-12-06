@@ -13,14 +13,10 @@ import java.util.List;
  */
 public class Post {
     private Image image;
-    private String user;
-    private String rating;
     private List<Comment> comments;
 
-    public Post(Image image, String user, String rating, List<Comment> comments) {
+    public Post(Image image, List<Comment> comments) {
         this.image = image;
-        this.user = user;
-        this.rating = rating;
         this.comments = comments;
     }
 
@@ -35,27 +31,11 @@ public class Post {
         this.image = image;
     }
 
-    public String getRating() {
-        return rating;
-    }
-
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
-
     public List<Comment> getComments() {
         return comments;
     }
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
     }
 }

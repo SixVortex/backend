@@ -6,8 +6,8 @@
 package org.sustaining.sustaining_backend.entities;
 
 /**
- *
- * @author Elev
+ * A representation of a Rating on an image.
+ * @author Adrian
  */
 public class Rating {
     private int rating;

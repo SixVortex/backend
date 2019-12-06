@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.sustaining.sustaining_backend.resources;
 
 import java.util.List;
@@ -19,8 +14,8 @@ import org.sustaining.sustaining_backend.beans.CommentBean;
 import org.sustaining.sustaining_backend.entities.Comment;
 
 /**
- *
- * @author Elev
+ * This class contains all the resources for comments.
+ * @author Adrian
  */
 @Path("")
 @Produces(MediaType.APPLICATION_JSON)

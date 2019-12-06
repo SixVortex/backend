@@ -1,24 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.sustaining.sustaining_backend;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
 
 /**
- *
- * @author Elev
+ * This is a classed the beans are supposed to use to get a connection with the database.
+ * @author Adrian
  */
 public class ConnectionFactory {
     
     private static boolean initialized = false;
     
-    public static void initialize(){
+    private static void initialize(){
         try {
             // This is needed for some java Imlementations
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
@@ -27,6 +20,10 @@ public class ConnectionFactory {
         }
     }
     
+    /**
+     * Use this function to get a connection to the database.
+     * @return A connection to the database. 
+     */
     public static Connection getConnection(){
         
         if(!initialized){

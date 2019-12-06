@@ -2,6 +2,10 @@ package org.sustaining.sustaining_backend.entities;
 
 import java.sql.Date;
 
+/**
+ * A representation of an Image.
+ * @author Adrian
+ */
 public class Image {
     private int id;
     private int userID;
@@ -9,14 +13,20 @@ public class Image {
     private String location;
     private String image;
     private String title;
+    private int rating;
+    private int fameCount;
+    private int shameCount;
+    private String username;
 
-    public Image(int id, int userID, Date date, String location, String image, String title) {
+    public Image(int id, int userID, Date date, String location, String image, String title, int rating, String username, int fameCount, int shameCount) {
         this.id = id;
         this.userID = userID;
         this.date = date;
         this.location = location;
         this.image = image;
         this.title = title;
+        this.rating = rating;
+        this.username = username;
     }
 
     public Image() {
@@ -68,5 +78,37 @@ public class Image {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public int getFameCount() {
+        return fameCount;
+    }
+
+    public void setFameCount(int fameCount) {
+        this.fameCount = fameCount;
+    }
+
+    public int getShameCount() {
+        return shameCount;
+    }
+
+    public void setShameCount(int shameCount) {
+        this.shameCount = shameCount;
     }
 }

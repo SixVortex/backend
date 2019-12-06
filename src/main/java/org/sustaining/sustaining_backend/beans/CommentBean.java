@@ -11,12 +11,17 @@ import org.sustaining.sustaining_backend.ConnectionFactory;
 import org.sustaining.sustaining_backend.entities.Comment;
 
 /**
- *
+ * This class handles all the logic for comments of an Image.
  * @author Silas
  */
 @Stateless
 public class CommentBean {
 
+    /**
+     * Gets all the comments for a certain image.
+     * @param imageID The image you want to retrieve comments from.
+     * @return A list of all the comments.
+     */
     public List<Comment> getComments(int imageID) {
         try ( Connection connection = ConnectionFactory.getConnection()) {
 
@@ -41,6 +46,12 @@ public class CommentBean {
         return new ArrayList();
     }
 
+    /**
+     * Posts a comment for a certain image.
+     * @param imageID The image to post the comment to.
+     * @param comment The comment to post.
+     * @return The same comment but with the auto-generated key attached to it.
+     */
     public Comment postComment(int imageID, Comment comment) {
         try ( Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement("INSERT INTO comment (image_id, user_id, text, date) VALUES(?, ?, ?, ?)");

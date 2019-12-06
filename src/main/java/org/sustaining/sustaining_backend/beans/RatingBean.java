@@ -3,22 +3,24 @@ package org.sustaining.sustaining_backend.beans;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import org.sustaining.sustaining_backend.ConnectionFactory;
 import org.sustaining.sustaining_backend.entities.Rating;
 
 /**
- *
- * @author
+ * This class handles all the logic for ratings of an Image.
+ * @author Adrian
  */
 @Stateless
 public class RatingBean {
 
+    /**
+     * Gets all the ratings for a specific image.
+     * @param imageID The id of the image to retrieve ratings from.
+     * @return A list of the ratings for the image.
+     */
     public List<Rating> getRatings(int imageID) {
         try ( Connection connection = ConnectionFactory.getConnection()) {
 
@@ -40,12 +42,17 @@ public class RatingBean {
         return new ArrayList();
     }
 
-    public boolean postRating(Rating rating) {
+    /**
+     * Posts a rating to an image.
+     * @param imageID The id of the image to rate.
+     * @param rating The rating to post.
+     * @return True if success, false if something went wrong.
+     */
+    public boolean postRating(int imageID, Rating rating) {
         try ( Connection connection = ConnectionFactory.getConnection()) {
-            String sql = "INSERT INTO image_user_rating (user_id, image_id, score) VALUES (?, ?, ?)";
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement("INSERT INTO image_user_rating (user_id, image_id, score) VALUES (?, ?, ?)");
             stmt.setInt(1, rating.getUserID());
-            stmt.setInt(2, rating.getImageID());
+            stmt.setInt(2, imageID);
             stmt.setInt(3, rating.getRating());
             int rowsAffected = stmt.executeUpdate();
 

@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import org.sustaining.sustaining_backend.beans.PostBean;
 
 /**
- *
+ * This class contains all the resources for posts.
  * @author Adrian
  */
 @Path("")
@@ -33,5 +33,11 @@ public class PostResource {
      */
     public Response getPosts(@PathParam("numberOfPosts") int numberOfPosts){
         return postBean.getPosts(numberOfPosts);
+    }
+    
+    @GET
+    @Path("post/{lastImageID}")
+    public Response getNextPost(@PathParam("lastImageID") int lastImageID){
+        return postBean.getNextPost(lastImageID);
     }
 }

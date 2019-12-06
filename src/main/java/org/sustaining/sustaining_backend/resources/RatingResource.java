@@ -19,8 +19,8 @@ import org.sustaining.sustaining_backend.beans.RatingBean;
 import org.sustaining.sustaining_backend.entities.Rating;
 
 /**
- *
- * @author Elev
+ * This class contains all the resources for ratings.
+ * @author Adrian
  */
 @Path("")
 @Produces(MediaType.APPLICATION_JSON)
@@ -36,11 +36,11 @@ public class RatingResource {
         return Response.status(Response.Status.OK).entity(imageRating).build();
     }
     
-    @Path("rating")
+    @Path("rating/{imageID}")
     @Consumes(MediaType.APPLICATION_JSON)
     @POST
-    public Response postRating(Rating rating){
-        boolean success = ratingBean.postRating(rating);
+    public Response postRating(@PathParam("imageID") int imageID, Rating rating){
+        boolean success = ratingBean.postRating(imageID, rating);
         return Response.status(success ? Response.Status.CREATED : Response.Status.BAD_REQUEST).build();
     }
 }
