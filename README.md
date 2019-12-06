@@ -1,2 +1,2 @@
 # Documentaiton
-Documentation is available in the Documentation folder in this repository.
+Documentation is available here: [/Documentation](index.html)
