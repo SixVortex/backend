@@ -1,2 +1,2 @@
 # Documentaiton
-Documentation is available here: [./Documentation](index.html)
+Documentation is available [here:](Documentation/index.html)
