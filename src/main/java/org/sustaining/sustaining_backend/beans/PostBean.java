@@ -72,6 +72,13 @@ public class PostBean {
         }
     }
 
+    /**
+     * Retrieves the a specific number of posts which have a fame rating.
+     *
+     * @param numberOfPosts This is how many posts you want to retrieve from the
+     * database.
+     * @return Fame posts.
+     */
     public Response getFamePosts(int numberOfPosts){
         try (Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM fame_image LIMIT ?");
@@ -106,6 +113,13 @@ public class PostBean {
         }
     }
     
+    /**
+     * Retrieves the a specific number of posts which have a shame rating.
+     *
+     * @param numberOfPosts This is how many posts you want to retrieve from the
+     * database.
+     * @return Shame posts.
+     */
     public Response getShamePosts(int numberOfPosts){
         try (Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM shame_image LIMIT ?");
