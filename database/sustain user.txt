@@ -1,0 +1,3 @@
+GRANT USAGE ON *.* TO 'sustain'@'%';
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON `sustain`.* TO 'sustain'@'%';
