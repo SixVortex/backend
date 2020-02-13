@@ -5,6 +5,31 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Sustaning api</h1>
+        <h2>GET</h2>
+        <ul>
+            <li><h3>path: api/rating/{imageID}</h3></li>
+            <li><h3>path: api/comment/{imageID}</h3></li>
+            <li><h3>path: api/images</h3></li>
+            <li><h3>path: api/image/{imageID}</h3></li>
+            <li><h3>path: api/posts/fame/{numberOfPosts}</h3></li>
+            <li><h3>path: api/posts/shame/{numberOfPosts}</h3></li>
+            <li><h3>path: api/post/{lastImageID}</h3></li>
+        </ul>
+        <h2>POST</h2>
+        <ul>
+            <li>
+                <h3>path: api/rating/{imageID}</h3>
+                <h4>body: {<br>"rating": "",<br> "userID": "",<br> "imageID": ""<br>}</h4>
+            </li>
+            <li>
+                <h3>path: api/comment/{imageID}</h3>
+                <h4>body: {<br>"id": "",<br> "imageID": "",<br> "userID": "",<br> "text": "",<br> "date": ""<br>}</h4>
+            </li>
+            <li>
+                <h3>path: api/image/{imageID}</h3>
+                <h4>body: {<br>"id": "",<br> "userID": "",<br> "date": "",<br> "location": "",<br> "image": "",<br> "title": "",<br> "rating": "",<br> "fameCount": "",<br> "shameCount": "",<br> "username": ""<br>}</h4>
+            </li>
+        </ul>
     </body>
 </html>

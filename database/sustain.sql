@@ -16,12 +16,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `sustain`
---
-CREATE DATABASE IF NOT EXISTS `sustain` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
-USE `sustain`;
-
 -- --------------------------------------------------------
 
 --
@@ -150,7 +144,7 @@ CREATE TABLE `user` (
 --
 DROP TABLE IF EXISTS `fame_image`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fame_image`  AS  select `full_image_info`.`image_id` AS `image_id`,`full_image_info`.`user_id` AS `user_id`,`full_image_info`.`user` AS `user`,`full_image_info`.`date` AS `date`,`full_image_info`.`title` AS `title`,`full_image_info`.`location` AS `location`,`full_image_info`.`image` AS `image`,`full_image_info`.`rating` AS `rating`,`full_image_info`.`fame_count` AS `fame_count`,`full_image_info`.`shame_count` AS `shame_count` from (`image` join `full_image_info`) where ((`full_image_info`.`rating` > -(1)) and (`full_image_info`.`image_id` = `image`.`id`)) ;
+CREATE  VIEW `fame_image`  AS  select `full_image_info`.`image_id` AS `image_id`,`full_image_info`.`user_id` AS `user_id`,`full_image_info`.`user` AS `user`,`full_image_info`.`date` AS `date`,`full_image_info`.`title` AS `title`,`full_image_info`.`location` AS `location`,`full_image_info`.`image` AS `image`,`full_image_info`.`rating` AS `rating`,`full_image_info`.`fame_count` AS `fame_count`,`full_image_info`.`shame_count` AS `shame_count` from (`image` join `full_image_info`) where ((`full_image_info`.`rating` > -(1)) and (`full_image_info`.`image_id` = `image`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -159,7 +153,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `full_image_info`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `full_image_info`  AS  select `image`.`id` AS `image_id`,`image`.`user_id` AS `user_id`,(select `user`.`username` from `user` where (`image`.`user_id` = `user`.`id`)) AS `user`,`image`.`date` AS `date`,`image`.`title` AS `title`,`image`.`location` AS `location`,`image`.`image` AS `image`,sum(`image_user_rating`.`score`) AS `rating`,(select count(`image_user_rating`.`score`) AS `count` from `image_user_rating` where ((`image_user_rating`.`score` > 0) and (`image_user_rating`.`image_id` = `image`.`id`))) AS `fame_count`,(select count(`image_user_rating`.`score`) AS `count` from `image_user_rating` where ((`image_user_rating`.`score` < 0) and (`image_user_rating`.`image_id` = `image`.`id`))) AS `shame_count` from (`image` join `image_user_rating`) where (`image_user_rating`.`image_id` = `image`.`id`) group by `image`.`id` ;
+CREATE  VIEW `full_image_info`  AS  select `image`.`id` AS `image_id`,`image`.`user_id` AS `user_id`,(select `user`.`username` from `user` where (`image`.`user_id` = `user`.`id`)) AS `user`,`image`.`date` AS `date`,`image`.`title` AS `title`,`image`.`location` AS `location`,`image`.`image` AS `image`,sum(`image_user_rating`.`score`) AS `rating`,(select count(`image_user_rating`.`score`) AS `count` from `image_user_rating` where ((`image_user_rating`.`score` > 0) and (`image_user_rating`.`image_id` = `image`.`id`))) AS `fame_count`,(select count(`image_user_rating`.`score`) AS `count` from `image_user_rating` where ((`image_user_rating`.`score` < 0) and (`image_user_rating`.`image_id` = `image`.`id`))) AS `shame_count` from (`image` join `image_user_rating`) where (`image_user_rating`.`image_id` = `image`.`id`) group by `image`.`id` ;
 
 -- --------------------------------------------------------
 
@@ -168,7 +162,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `shame_image`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `shame_image`  AS  select `full_image_info`.`image_id` AS `image_id`,`full_image_info`.`user_id` AS `user_id`,`full_image_info`.`user` AS `user`,`full_image_info`.`date` AS `date`,`full_image_info`.`title` AS `title`,`full_image_info`.`location` AS `location`,`full_image_info`.`image` AS `image`,`full_image_info`.`rating` AS `rating`,`full_image_info`.`fame_count` AS `fame_count`,`full_image_info`.`shame_count` AS `shame_count` from (`image` join `full_image_info`) where ((`full_image_info`.`rating` < 0) and (`full_image_info`.`image_id` = `image`.`id`)) ;
+CREATE  VIEW `shame_image`  AS  select `full_image_info`.`image_id` AS `image_id`,`full_image_info`.`user_id` AS `user_id`,`full_image_info`.`user` AS `user`,`full_image_info`.`date` AS `date`,`full_image_info`.`title` AS `title`,`full_image_info`.`location` AS `location`,`full_image_info`.`image` AS `image`,`full_image_info`.`rating` AS `rating`,`full_image_info`.`fame_count` AS `fame_count`,`full_image_info`.`shame_count` AS `shame_count` from (`image` join `full_image_info`) where ((`full_image_info`.`rating` < 0) and (`full_image_info`.`image_id` = `image`.`id`)) ;
 
 --
 -- Indexes for dumped tables
