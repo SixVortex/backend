@@ -32,7 +32,7 @@ public class ConnectionFactory {
         }
         
         try{
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/sustain?user=sustain&password=CO7fdAQXMxytT7Pn");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/sustain?user=root&password=");
         } catch(Exception ex){
             System.out.println("ConnectionFactory.getConnection: " + ex.getMessage());
             return null;
