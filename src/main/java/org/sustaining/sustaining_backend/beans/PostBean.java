@@ -164,26 +164,27 @@ public class PostBean {
             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM full_image_info WHERE image_id > ? LIMIT 1");
             stmt.setInt(1, lastImageID);
             ResultSet data = stmt.executeQuery();
-            data.next();
+            if(data.next()) {
 
-            int imageID = data.getInt("image_id");
-            int userID = data.getInt("user_id");
-            String user = data.getString("user");
-            Date date = data.getDate("date");
-            String title = data.getString("title");
-            String location = data.getString("location");
-            String imageData = data.getString("image");
-            int rating = data.getInt("rating");
-            int fameCount = data.getInt("fame_count");
-            int shameCount = data.getInt("shame_count");
+                int imageID = data.getInt("image_id");
+                int userID = data.getInt("user_id");
+                String user = data.getString("user");
+                Date date = data.getDate("date");
+                String title = data.getString("title");
+                String location = data.getString("location");
+                String imageData = data.getString("image");
+                int rating = data.getInt("rating");
+                int fameCount = data.getInt("fame_count");
+                int shameCount = data.getInt("shame_count");
 
-            List<Comment> comments = commentBean.getComments(lastImageID);
-            
-            Image postImage = new Image(imageID, userID, date, location, imageData, title, rating, user, fameCount, shameCount);
-            Post post = new Post(postImage, comments);
-            
-            return Response.status(Response.Status.OK).entity(post).build();
+                List<Comment> comments = commentBean.getComments(lastImageID);
 
+                Image postImage = new Image(imageID, userID, date, location, imageData, title, rating, user, fameCount, shameCount);
+                Post post = new Post(postImage, comments);
+
+                return Response.status(Response.Status.OK).entity(post).build();
+            }
+            return Response.status(Response.Status.NO_CONTENT).build();
         } catch (Exception e) {
             System.out.println("PostBean.getNextPost: " + e.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

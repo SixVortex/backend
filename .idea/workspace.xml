@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="04ee05a1-235d-4e81-820e-65ee7dbfc2e3" name="Default Changelist" comment="" />
+    <list default="true" id="04ee05a1-235d-4e81-820e-65ee7dbfc2e3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/sustaining/sustaining_backend/ConnectionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sustaining/sustaining_backend/ConnectionFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/sustaining/sustaining_backend/beans/PostBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sustaining/sustaining_backend/beans/PostBean.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +25,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../gdx_jatd" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -34,6 +39,8 @@
       <updated>1581319292638</updated>
       <workItem from="1581319299017" duration="807000" />
       <workItem from="1581334174686" duration="14000" />
+      <workItem from="1581590274345" duration="411000" />
+      <workItem from="1581590912571" duration="150000" />
     </task>
     <servers />
   </component>
@@ -45,6 +52,10 @@
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="414" y="236" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1581320209547" />
+    <state x="808" y="470" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1581590388289">
+      <screen x="0" y="0" width="1920" height="1160" />
+    </state>
+    <state x="808" y="470" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1581590388289" />
     <state x="740" y="336" key="FileChooserDialogImpl" timestamp="1581334187384">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
