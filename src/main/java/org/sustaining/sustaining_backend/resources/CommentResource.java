@@ -2,6 +2,7 @@ package org.sustaining.sustaining_backend.resources;
 
 import java.util.List;
 import javax.ejb.EJB;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -23,18 +24,18 @@ public class CommentResource {
     
     @EJB
     CommentBean commentBean;
-    
+
     @Path("comment/{imageID}")
     @GET
     public Response getComments(@PathParam("imageID") int imageID){
         List<Comment> imageComments = commentBean.getComments(imageID);
         return Response.ok().entity(imageComments).build();
     }
-    
+
     @Path("comment/{imageID}")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response postComment(@PathParam("imageID") int imageID, Comment comment){
+    public Response postComment(@PathParam("imageID") int imageID, @Valid Comment comment){
         Comment createdComment = commentBean.postComment(imageID, comment);
         return Response.status(Response.Status.CREATED).entity(createdComment).build();
     }

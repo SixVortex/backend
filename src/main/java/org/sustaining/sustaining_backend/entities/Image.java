@@ -1,5 +1,6 @@
 package org.sustaining.sustaining_backend.entities;
 
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 /**
@@ -8,10 +9,15 @@ import java.sql.Date;
  */
 public class Image {
     private int id;
+    @NotNull
     private int userID;
+    @NotNull
     private Date date;
+    @NotNull
     private String location;
+    @NotNull
     private String image;
+    @NotNull
     private String title;
     private int rating;
     private int fameCount;
