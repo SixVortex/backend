@@ -8,14 +8,16 @@ import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
+@Path("")
 public class UserResource {
 
     @EJB
     UserBean userBean;
 
     @GET
-    @Path("/verify")
+    @Path("verify")
     public Response verify(@HeaderParam("authorization") String token) {
+        System.out.println(token);
         if (userBean.verify(token)) {
             return Response.status(Response.Status.OK).build();
         }
