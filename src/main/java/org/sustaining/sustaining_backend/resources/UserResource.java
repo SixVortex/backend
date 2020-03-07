@@ -14,17 +14,7 @@ public class UserResource {
     UserBean userBean;
 
     @GET
-    @Path("")
-    public Response getToken(@HeaderParam("authorization") String code) {
-        String token = userBean.getToken(code);
-        if (!token.isEmpty()) {
-            return Response.status(Response.Status.OK).header("token", token).build();
-        }
-        return Response.status(Response.Status.BAD_REQUEST).build();
-    }
-
-    @GET
-    @Path("")
+    @Path("/verify")
     public Response verify(@HeaderParam("authorization") String token) {
         if (userBean.verify(token)) {
             return Response.status(Response.Status.OK).build();
