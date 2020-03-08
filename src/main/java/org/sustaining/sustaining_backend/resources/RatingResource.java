@@ -4,6 +4,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -34,8 +35,8 @@ public class RatingResource {
     @Path("rating/{imageID}")
     @Consumes(MediaType.APPLICATION_JSON)
     @POST
-    public Response postRating(@PathParam("imageID") int imageID, Rating rating){
-        boolean success = ratingBean.postRating(imageID, rating);
+    public Response postRating(@PathParam("imageID") int imageID, Rating rating, @HeaderParam("authorization") String token){
+        boolean success = ratingBean.postRating(imageID, rating, token);
         return Response.status(success ? Response.Status.CREATED : Response.Status.BAD_REQUEST).build();
     }
 }

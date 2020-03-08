@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import org.sustaining.sustaining_backend.ConnectionFactory;
 import org.sustaining.sustaining_backend.entities.Rating;
@@ -16,6 +17,9 @@ import org.sustaining.sustaining_backend.entities.Rating;
 @Stateless
 public class RatingBean {
 
+    @EJB
+    UserBean userBean;
+    
     /**
      * Gets all the ratings for a specific image.
      * @param imageID The id of the image to retrieve ratings from.
@@ -46,12 +50,14 @@ public class RatingBean {
      * Posts a rating to an image.
      * @param imageID The id of the image to rate.
      * @param rating The rating to post.
+     * @param token The token of the user posting the comment.
      * @return True if success, false if something went wrong.
      */
-    public boolean postRating(int imageID, Rating rating) {
+    public boolean postRating(int imageID, Rating rating, String token) {
         try ( Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement("INSERT INTO image_user_rating (user_id, image_id, score) VALUES (?, ?, ?)");
-            stmt.setInt(1, rating.getUserID());
+            int userId = userBean.getUserId(token);
+            stmt.setInt(1, userId);
             stmt.setInt(2, imageID);
             stmt.setInt(3, rating.getRating());
             int rowsAffected = stmt.executeUpdate();

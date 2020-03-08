@@ -5,6 +5,7 @@ import javax.ejb.EJB;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -35,8 +36,8 @@ public class CommentResource {
     @Path("comment/{imageID}")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response postComment(@PathParam("imageID") int imageID, @Valid Comment comment){
-        Comment createdComment = commentBean.postComment(imageID, comment);
+    public Response postComment(@PathParam("imageID") int imageID, @Valid Comment comment, @HeaderParam("authorization") String token){
+        Comment createdComment = commentBean.postComment(imageID, comment, token);
         return Response.status(Response.Status.CREATED).entity(createdComment).build();
     }
 }

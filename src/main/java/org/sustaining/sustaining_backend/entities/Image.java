@@ -9,7 +9,6 @@ import java.sql.Date;
  */
 public class Image {
     private int id;
-    @NotNull
     private int userID;
     @NotNull
     private Date date;

@@ -11,7 +11,6 @@ public class Comment {
     private int id;
     @NotNull
     private int imageID;
-    @NotNull
     private int userID;
     @NotNull
     private String text;

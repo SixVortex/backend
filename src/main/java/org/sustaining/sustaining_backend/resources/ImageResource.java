@@ -5,6 +5,7 @@ import javax.ejb.EJB;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -50,8 +51,8 @@ public class ImageResource {
     @Path("image")
     @Consumes(MediaType.APPLICATION_JSON)
     @POST
-    public Response postImage(@Valid Image image) {
-        Image createdImage = imageBean.postImage(image);
+    public Response postImage(@Valid Image image, @HeaderParam("authorization") String token) {
+        Image createdImage = imageBean.postImage(image, token);
         if (createdImage != null) {
             return Response.status(Response.Status.CREATED).entity(createdImage).build();
         }

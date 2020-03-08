@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import org.sustaining.sustaining_backend.ConnectionFactory;
 import org.sustaining.sustaining_backend.entities.Comment;
@@ -17,6 +18,9 @@ import org.sustaining.sustaining_backend.entities.Comment;
 @Stateless
 public class CommentBean {
 
+    @EJB
+    UserBean userBean;
+    
     /**
      * Gets all the comments for a certain image.
      * @param imageID The image you want to retrieve comments from.
@@ -50,13 +54,16 @@ public class CommentBean {
      * Posts a comment for a certain image.
      * @param imageID The image to post the comment to.
      * @param comment The comment to post.
+     * @param token The token of the user posting the comment.
      * @return The same comment but with the auto-generated key attached to it.
      */
-    public Comment postComment(int imageID, Comment comment) {
+    public Comment postComment(int imageID, Comment comment, String token) {
         try ( Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement("INSERT INTO comment (image_id, user_id, text, date) VALUES(?, ?, ?, ?)");
+            
+            int userId = userBean.getUserId(token);
             stmt.setInt(1, imageID);
-            stmt.setInt(2, comment.getUserID());
+            stmt.setInt(2, userId);
             stmt.setString(3, comment.getText());
             stmt.setDate(4, comment.getDate());
             if (stmt.executeUpdate() > 0) {

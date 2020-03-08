@@ -3,6 +3,7 @@ package org.sustaining.sustaining_backend.beans;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import org.sustaining.sustaining_backend.ConnectionFactory;
@@ -16,6 +17,9 @@ import org.sustaining.sustaining_backend.entities.Image;
 @Stateless
 public class ImageBean {
 
+    @EJB
+    UserBean userBean;
+    
     /**
      * Gets all the images available on the database.
      *
@@ -78,12 +82,15 @@ public class ImageBean {
      * Posts an image to the database.
      *
      * @param image The image to post.
+     * @param token The token of the user posting the comment.
      * @return The same image but with the auto-generated id attached to it.
      */
-    public Image postImage(Image image) {
+    public Image postImage(Image image, String token) {
         try (Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement("INSERT INTO image (user_id, date, location, image, title) VALUES(?, ?, ?, ?, ?)");
-            stmt.setInt(1, image.getUserID());
+            
+            int userId = userBean.getUserId(token);
+            stmt.setInt(1, userId);
             stmt.setDate(2, image.getDate());
             stmt.setString(3, image.getLocation());
             stmt.setString(4, image.getImage());
