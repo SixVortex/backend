@@ -1,35 +1,69 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>
-        <h1>Sustaning api</h1>
-        <h2>GET</h2>
-        <ul>
-            <li><h3>path: api/rating/{imageID}</h3></li>
-            <li><h3>path: api/comment/{imageID}</h3></li>
-            <li><h3>path: api/images</h3></li>
-            <li><h3>path: api/image/{imageID}</h3></li>
-            <li><h3>path: api/posts/fame/{numberOfPosts}</h3></li>
-            <li><h3>path: api/posts/shame/{numberOfPosts}</h3></li>
-            <li><h3>path: api/post/{lastImageID}</h3></li>
-        </ul>
-        <h2>POST</h2>
-        <ul>
-            <li>
-                <h3>path: api/rating/{imageID}</h3>
-                <h4>body: {<br>"rating": "",<br> "userID": "",<br> "imageID": ""<br>}</h4>
-            </li>
-            <li>
-                <h3>path: api/comment/{imageID}</h3>
-                <h4>body: {<br>"id": "",<br> "imageID": "",<br> "userID": "",<br> "text": "",<br> "date": ""<br>}</h4>
-            </li>
-            <li>
-                <h3>path: api/image/{imageID}</h3>
-                <h4>body: {<br>"id": "",<br> "userID": "",<br> "date": "",<br> "location": "",<br> "image": "",<br> "title": "",<br> "rating": "",<br> "fameCount": "",<br> "shameCount": "",<br> "username": ""<br>}</h4>
-            </li>
-        </ul>
-    </body>
+<head>
+    <title>Start Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<h1>Sustaining api</h1>
+<h2>GET</h2>
+<ul>
+    <li><h3>path: api/rating/{imageID}</h3></li>
+    <li><h3>path: api/comment/{imageID}</h3></li>
+    <li><h3>path: api/images</h3></li>
+    <li><h3>path: api/image/{imageID}</h3></li>
+    <li><h3>path: api/posts/fame/{numberOfPosts}</h3></li>
+    <li><h3>path: api/posts/shame/{numberOfPosts}</h3></li>
+    <li><h3>path: api/post/{lastImageID}</h3></li>
+</ul>
+<h2>POST</h2>
+<ul>
+    <li>
+        <h3>path: api/rating/{imageID}</h3>
+        <h4>method: "POST"</h4>
+        <h4>headers: {
+            <div>'authorization': "Token ID"</div>
+            <div>'content-type':"application/json"</div>
+            }
+        </h4>
+        <h4>body: {
+            <div>"rating": "",</div>
+            <div>"imageID": ""</div>
+            }
+        </h4>
+    </li>
+    <li>
+        <h3>path: api/comment/{imageID}</h3>
+        <h4>method: "POST"</h4>
+        <h4>headers: {
+            <div>'authorization': "Token ID"</div>
+            <div>'content-type':"application/json"</div>
+            }
+        </h4>
+        <h4>body: {
+            <div>"id": "",</div>
+            <div>"imageID": "",</div>
+            <div>"text": "",</div>
+            <div>"date": ""</div>
+            }
+        </h4>
+    </li>
+    <li>
+        <h3>path: api/image/</h3>
+        <h4>method: "POST"</h4>
+        <h4>headers: {
+            <div>'authorization': "Token ID"</div>
+            <div>'content-type':"application/json"</div>
+            }
+        </h4>
+        <h4>body: {
+            <div>"date": "",</div>
+            <div>"location": "",</div>
+            <div>"image": "",</div>
+            <div>"title": "",</div>
+            }
+        </h4>
+    </li>
+</ul>
+</body>
 </html>

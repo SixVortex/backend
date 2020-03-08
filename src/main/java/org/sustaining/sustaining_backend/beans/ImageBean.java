@@ -105,7 +105,7 @@ public class ImageBean {
                 return null;
             }
             stmt = connection.prepareStatement("INSERT INTO image_user_rating (user_id, image_id, score) VALUES (?, ?, ?)");
-            stmt.setInt(1, image.getUserID());
+            stmt.setInt(1, userId);
             stmt.setInt(2, image.getId());
             stmt.setInt(3, image.getRating());
             stmt.executeUpdate();
