@@ -19,12 +19,11 @@ import org.sustaining.sustaining_backend.entities.User;
 @Stateless
 public class UserBean {
 
-    //TEMP - FRONTEND: https://developers.google.com/identity/sign-in/web/backend-auth
     public boolean verify(String token) {
         try {
             JsonFactory jsonFactory = new JacksonFactory();
             HttpTransport transport = new NetHttpTransport();
-            String CLIENT_ID = "618995472280-ejfo1drjtmhud87ev6i5a4ddp67087v1.apps.googleusercontent.com";//replace client id with another one
+            String CLIENT_ID = "460081610512-2oj0qq8g65u4gk91obanganpq63tt3m2.apps.googleusercontent.com";
             GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
                     // Specify the CLIENT_ID of the app that accesses the backend:
                     .setAudience(Collections.singletonList(CLIENT_ID))
@@ -47,10 +46,6 @@ public class UserBean {
             } else {
                 System.out.println("Invalid ID token.");
             }
-
-            //TODO
-            //Check if new user
-            //Store in DB
         } catch (Exception e) {
             System.out.println("Error in UserBean.verify: " + e.getMessage());
         }
