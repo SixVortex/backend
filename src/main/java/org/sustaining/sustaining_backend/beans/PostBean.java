@@ -177,7 +177,7 @@ public class PostBean {
                 int fameCount = data.getInt("fame_count");
                 int shameCount = data.getInt("shame_count");
 
-                List<Comment> comments = commentBean.getComments(lastImageID);
+                List<Comment> comments = commentBean.getComments(imageID);
 
                 Image postImage = new Image(imageID, userID, date, location, imageData, title, rating, user, fameCount, shameCount);
                 Post post = new Post(postImage, comments);
