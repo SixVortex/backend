@@ -16,6 +16,8 @@ import java.util.Collections;
 import org.sustaining.sustaining_backend.ConnectionFactory;
 import org.sustaining.sustaining_backend.entities.User;
 
+import java.sql.Connection;
+
 @Stateless
 public class UserBean {
 
@@ -86,4 +88,16 @@ public class UserBean {
         }
         throw new Exception("Failed to get userId");
     }
+    
+    public String getUsername(int userID){
+		try ( Connection connection = ConnectionFactory.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement("SELECT username from sustain.user WHERE(id = ?);");
+            stmt.setInt(1, userID);
+			ResultSet data = stmt.executeQuery();
+			return data.getString("username");
+        } catch (Exception e) {
+            System.out.println("UserBean.getUsername: " + e.getMessage());
+        }
+		return "";
+	}
 }
