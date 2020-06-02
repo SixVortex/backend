@@ -22,7 +22,7 @@ import java.sql.Connection;
 public class UserBean {
 
     private static final String CLIENT_ID = "460081610512-2oj0qq8g65u4gk91obanganpq63tt3m2.apps.googleusercontent.com";
-    
+
     public boolean verify(String token) {
         try {
             JsonFactory jsonFactory = new JacksonFactory();
@@ -76,10 +76,11 @@ public class UserBean {
                 stmt.setString(1, oauthId);
                 stmt.setString(2, name);
                 ResultSet data = stmt.executeQuery();
-                
-                if(data.first())
+
+                if (data.first()) {
                     return data.getInt(1);
-                
+                }
+
             } else {
                 System.out.println("Invalid ID token.");
             }
@@ -88,16 +89,17 @@ public class UserBean {
         }
         throw new Exception("Failed to get userId");
     }
-    
-    public String getUsername(int userID){
-		try ( Connection connection = ConnectionFactory.getConnection()) {
+
+    public String getUsername(int userID) {
+        try (Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement("SELECT username from sustain.user WHERE(id = ?);");
             stmt.setInt(1, userID);
-			ResultSet data = stmt.executeQuery();
-			return data.getString("username");
+            ResultSet data = stmt.executeQuery();
+            data.next();
+            return data.getString("username");
         } catch (Exception e) {
             System.out.println("UserBean.getUsername: " + e.getMessage());
         }
-		return "";
-	}
+        return "";
+    }
 }
