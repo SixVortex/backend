@@ -31,7 +31,9 @@ public class Image {
         this.image = image;
         this.title = title;
         this.rating = rating;
-        this.username = username;
+		this.username = username;
+		this.fameCount = fameCount;
+		this.shameCount = shameCount;
     }
 
     public Image() {
