@@ -5,9 +5,11 @@ import java.sql.Date;
 
 /**
  * A representation of an Image.
+ *
  * @author Adrian
  */
 public class Image {
+
     private int id;
     private int userID;
     @NotNull
@@ -31,9 +33,9 @@ public class Image {
         this.image = image;
         this.title = title;
         this.rating = rating;
-		this.username = username;
-		this.fameCount = fameCount;
-		this.shameCount = shameCount;
+        this.username = username;
+        this.fameCount = fameCount;
+        this.shameCount = shameCount;
     }
 
     public Image() {
