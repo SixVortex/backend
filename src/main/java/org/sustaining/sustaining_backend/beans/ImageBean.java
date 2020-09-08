@@ -116,4 +116,24 @@ public class ImageBean {
         }
         return null;
     }
+    
+    public Boolean deleteImage(int imageID, String token){
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            String userRank = userBean.getRank(token);
+            if(!userRank.equals("admin")){
+                return false;
+            }
+            PreparedStatement stmt = connection.prepareStatement("DELETE * from sustain.image WHERE(id = ?);");
+            stmt.setInt(1, imageID);
+            if(stmt.execute()){
+                return true;
+            }
+            else{
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("Error in ImageBean.deleteImage: " + e.getMessage());
+        }
+        return false;
+    }
 }

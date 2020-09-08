@@ -17,6 +17,8 @@ import org.sustaining.sustaining_backend.ConnectionFactory;
 import org.sustaining.sustaining_backend.entities.User;
 
 import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Stateless
 public class UserBean {
@@ -101,5 +103,35 @@ public class UserBean {
             System.out.println("UserBean.getUsername: " + e.getMessage());
         }
         return "";
+    }
+    
+    public String getRank(String token){
+        try {
+            int userID = getUserId(token);
+            
+            try (Connection connection = ConnectionFactory.getConnection()) {
+                PreparedStatement stmt = connection.prepareStatement("SELECT rank from sustain.user WHERE(id = ?);");
+                stmt.setInt(1, userID);
+                ResultSet data = stmt.executeQuery();
+                data.next();
+                return data.getString("rank");
+            } catch (Exception e) {
+                System.out.println("UserBean.getRank: " + e.getMessage());
+            }
+            
+        } catch (Exception e) {
+            System.out.println("UserBean.getRank: " + e.getMessage());
+        }
+        return "user";
+    }
+    
+    public void deleteUser(int userID){
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement("DELETE * from sustain.user WHERE(id = ?);");
+            stmt.setInt(1, userID);
+            ResultSet result = stmt.executeQuery();
+        } catch (Exception e) {
+            System.out.println("UserBean.getRank: " + e.getMessage());
+        }
     }
 }

@@ -28,11 +28,30 @@ public class UserResource {
     @GET
     @Path("user/{userID}")
     public Response getUser(@PathParam("userID") int userID){
-		String username = userBean.getUsername(userID);
-		if(username != ""){
-			return Response.status(Response.Status.OK).entity(username).build();
-		}
-		return Response.status(Response.Status.NOT_FOUND).build();
+	String username = userBean.getUsername(userID);
+	if(username != ""){
+            return Response.status(Response.Status.OK).entity(username).build();
+	}
+        return Response.status(Response.Status.NOT_FOUND).build();
+    }
+    
+    @GET
+    @Path("delete/user/{userID}")
+    public Response deleteUser(@PathParam("userID") int userID, @HeaderParam("authorization") String token){
+        if (userBean.verify(token)) {
+            String rank = userBean.getRank(token);
+            if(rank.equals("admin")){
+                userBean.deleteUser(userID);
+                return Response.status(Response.Status.OK).build();
+            }
+            else{
+                return Response.status(Response.Status.UNAUTHORIZED).build();
+            }
+        }
+        else{
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+        
     }
 
 }
