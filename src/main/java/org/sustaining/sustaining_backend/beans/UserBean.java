@@ -109,16 +109,12 @@ public class UserBean {
         try {
             int userID = getUserId(token);
             
-            try (Connection connection = ConnectionFactory.getConnection()) {
-                PreparedStatement stmt = connection.prepareStatement("SELECT rank from sustain.user WHERE(id = ?);");
-                stmt.setInt(1, userID);
-                ResultSet data = stmt.executeQuery();
-                data.next();
-                return data.getString("rank");
-            } catch (Exception e) {
-                System.out.println("UserBean.getRank: " + e.getMessage());
-            }
-            
+            Connection connection = ConnectionFactory.getConnection();
+            PreparedStatement stmt = connection.prepareStatement("SELECT rank from sustain.user WHERE(id = ?);");
+            stmt.setInt(1, userID);
+            ResultSet data = stmt.executeQuery();
+            data.next();
+            return data.getString("rank");
         } catch (Exception e) {
             System.out.println("UserBean.getRank: " + e.getMessage());
         }
@@ -127,7 +123,7 @@ public class UserBean {
     
     public void deleteUser(int userID){
         try (Connection connection = ConnectionFactory.getConnection()) {
-            PreparedStatement stmt = connection.prepareStatement("DELETE * from sustain.user WHERE(id = ?);");
+            PreparedStatement stmt = connection.prepareStatement("DELETE from sustain.user WHERE(id = ?);");
             stmt.setInt(1, userID);
             ResultSet result = stmt.executeQuery();
         } catch (Exception e) {
