@@ -123,7 +123,7 @@ public class ImageBean {
             if(!userRank.equals("admin")){
                 return false;
             }
-            PreparedStatement stmt = connection.prepareStatement("DELETE * from sustain.image WHERE(id = ?);");
+            PreparedStatement stmt = connection.prepareStatement("DELETE from sustain.image WHERE(id = ?);");
             stmt.setInt(1, imageID);
             if(stmt.execute()){
                 return true;
