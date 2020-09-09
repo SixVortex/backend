@@ -61,4 +61,10 @@ public class PostResource {
     public Response getNextPost(@PathParam("lastImageID") int lastImageID) {
         return postBean.getNextPost(lastImageID);
     }
+    
+    @GET
+    @Path("postsid/all/{numberOfPosts}")
+    public Response getPostsID(@PathParam("numberOfPosts") int numberOfPosts) {
+        return postBean.getPostsID(numberOfPosts);
+    }
 }
