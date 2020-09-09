@@ -120,14 +120,4 @@ public class UserBean {
         }
         return "user";
     }
-    
-    public void deleteUser(int userID){
-        try (Connection connection = ConnectionFactory.getConnection()) {
-            PreparedStatement stmt = connection.prepareStatement("DELETE from sustain.user WHERE(id = ?);");
-            stmt.setInt(1, userID);
-            ResultSet result = stmt.executeQuery();
-        } catch (Exception e) {
-            System.out.println("UserBean.getRank: " + e.getMessage());
-        }
-    }
 }

@@ -58,15 +58,4 @@ public class ImageResource {
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
-    
-    @GET
-    @Path("detete/image/{imageID}")
-    public Response deletePost(@PathParam("imageID") int imageID, @HeaderParam("authorization") String token){
-        if(imageBean.deleteImage(imageID, token)){
-            return Response.status(Response.Status.OK).build();
-        }
-        else{
-            return Response.status(Response.Status.UNAUTHORIZED).build();
-        }
-    }
 }
