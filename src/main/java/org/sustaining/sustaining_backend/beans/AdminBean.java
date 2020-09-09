@@ -24,14 +24,14 @@ public class AdminBean {
     @EJB
     UserBean userBean;
     
-    public Boolean CheckIfAdmin(String token){
+    public Boolean isAdmin(String token){
         String userRank = userBean.getRank(token);
         return userRank.equals("admin");
     }
     
     public Response deleteImage(int imageID, String token){
         try (Connection connection = ConnectionFactory.getConnection()) {
-            if(!CheckIfAdmin(token)){
+            if(!isAdmin(token)){
                 return Response.status(Response.Status.UNAUTHORIZED).build();
             }
             PreparedStatement stmt = connection.prepareStatement("DELETE from sustain.image WHERE(id = ?);");
@@ -50,7 +50,7 @@ public class AdminBean {
     
     public Response deleteUser(int userID, String token){
         try (Connection connection = ConnectionFactory.getConnection()) {
-            if(!CheckIfAdmin(token)){
+            if(!isAdmin(token)){
                 return Response.status(Response.Status.UNAUTHORIZED).build();
             }
             PreparedStatement stmt = connection.prepareStatement("DELETE from sustain.user WHERE(id = ?);");
