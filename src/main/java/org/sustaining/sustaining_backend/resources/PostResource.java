@@ -21,7 +21,21 @@ public class PostResource {
 
     @EJB
     PostBean postBean;
-
+    
+    
+    
+    /**
+     * This function gets a post with the postID/imageID
+     *
+     * @param postID
+     * @return returns the post
+     */
+    @GET
+    @Path("post/id/{postID}")
+    public Response getPost(@PathParam("postID") int postID) {
+        return postBean.getPost(postID);
+    }
+    
     /**
      * This function is automatically called by the server when a GET request is sent to
      * the specified Path. It parses the amount of posts to get and returns them in a Response.

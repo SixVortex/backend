@@ -25,7 +25,48 @@ public class PostBean {
 
     @EJB
     private CommentBean commentBean;
+    
+    
+    /**
+     * Retrieves the data necessary to form a Post instance from the database
+     * and packs it into a Response instance.
+     *
+     * @param postID This is the image you want to retrieve from the
+     *                      database.
+     * @return The response to send back to the frontend.
+     */
+    public Response getPost(int postID) {
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM full_image_info WHERE image_id = ?");
+            stmt.setInt(1, postID);
+            ResultSet data = stmt.executeQuery();
 
+            if(data.first()){
+                int imageID = data.getInt("image_id");
+                int userID = data.getInt("user_id");
+                String user = data.getString("user");
+                Date date = data.getDate("date");
+                String title = data.getString("title");
+                String location = data.getString("location");
+                String imageData = data.getString("image");
+                int rating = data.getInt("rating");
+                int fameCount = data.getInt("fame_count");
+                int shameCount = data.getInt("shame_count");
+
+                List<Comment> comments = commentBean.getComments(imageID);
+
+                Image postImage = new Image(imageID, userID, date, location, imageData, title, rating, user, fameCount, shameCount);
+            
+                Post post = new Post(postImage, comments);
+                return Response.status(Response.Status.OK).entity(post).build();
+            }
+            return Response.status(Response.Status.NO_CONTENT).build();
+        } catch (Exception ex) {
+            System.out.println("PostBean.getPosts: " + ex.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
     /**
      * Retrieves the data necessary to form a Post instance from the database
      * and packs it into a Response instance.
