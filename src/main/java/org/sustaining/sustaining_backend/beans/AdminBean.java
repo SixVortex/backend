@@ -71,8 +71,8 @@ public class AdminBean {
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 	}
 	
-	public Response getUsers(int userAmount){
-		try (Connection connection = ConnectionFactory.getConnection()) {
+    public Response getUsers(int userAmount){
+        try (Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM user LIMIT ?");
             stmt.setInt(1, userAmount);
             ResultSet data = stmt.executeQuery();
@@ -81,7 +81,7 @@ public class AdminBean {
 
             while (data.next()) {
                 int id = data.getInt("id");
-				String username = data.getString("username");
+                String username = data.getString("username");
 				
                 users.add(new User(id, username));
             }
@@ -94,5 +94,5 @@ public class AdminBean {
             System.out.println("PostBean.getPosts: " + ex.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
-	}
+    }
 }
