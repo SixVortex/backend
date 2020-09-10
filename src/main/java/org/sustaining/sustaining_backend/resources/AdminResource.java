@@ -42,7 +42,7 @@ public class AdminResource {
     @GET
     @Path("users/{userAmount}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUsers(@PathParam("userAmount") int userAmount){
-        return adminBean.getUsers(userAmount);
+    public Response getUsers(@PathParam("userAmount") int userAmount, @HeaderParam("authorization") String token){
+        return adminBean.getUsers(userAmount, token);
     }
 }

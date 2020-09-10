@@ -71,7 +71,10 @@ public class AdminBean {
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 	}
 	
-    public Response getUsers(int userAmount){
+    public Response getUsers(int userAmount, String token){
+        if(!isAdmin(token)){
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
         try (Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM user LIMIT ?");
             stmt.setInt(1, userAmount);
