@@ -36,4 +36,10 @@ public class AdminResource {
     public Response deleteUser(@PathParam("userID") int userID, @HeaderParam("authorization") String token){
         return adminBean.deleteUser(userID, token);
     }
+    
+    @GET
+    @Path("users/{userAmount}")
+    public Response getUsers(@PathParam("userAmount") int userAmount){
+        return adminBean.getUsers(userAmount);
+    }
 }

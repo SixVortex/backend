@@ -8,10 +8,14 @@ package org.sustaining.sustaining_backend.beans;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.core.Response;
 import org.sustaining.sustaining_backend.ConnectionFactory;
+import org.sustaining.sustaining_backend.entities.User;
 
 /**
  * This class handles all the logic for admins
@@ -65,5 +69,30 @@ public class AdminBean {
             System.out.println("UserBean.getRank: " + e.getMessage());
         }
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-    }
+	}
+	
+	public Response getUsers(int userAmount){
+		try (Connection connection = ConnectionFactory.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM user LIMIT ?");
+            stmt.setInt(1, userAmount);
+            ResultSet data = stmt.executeQuery();
+
+            List<User> users = new ArrayList();
+
+            while (data.next()) {
+                int id = data.getInt("id");
+				String username = data.getString("username");
+				
+                users.add(new User(id, username));
+            }
+            if (!users.isEmpty()) {
+                return Response.status(Response.Status.OK).entity(users).build();
+            } else {
+                return Response.status(Response.Status.NO_CONTENT).entity(users).build();
+            }
+        } catch (Exception ex) {
+            System.out.println("PostBean.getPosts: " + ex.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+	}
 }
