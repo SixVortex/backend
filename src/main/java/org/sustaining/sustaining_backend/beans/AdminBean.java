@@ -38,10 +38,17 @@ public class AdminBean {
             if(!isAdmin(token)){
                 return Response.status(Response.Status.UNAUTHORIZED).build();
             }
-            PreparedStatement stmt = connection.prepareStatement("DELETE from sustain.image WHERE(id = ?);");
+            PreparedStatement stmt = connection.prepareStatement("DELETE from sustain.image_user_rating WHERE(id = ?);");
             stmt.setInt(1, imageID);
             if(stmt.execute()){
-                return Response.status(Response.Status.OK).build();
+                stmt = connection.prepareStatement("DELETE from sustain.image WHERE(id = ?);");
+                stmt.setInt(1, imageID);
+                if(stmt.execute()){
+                    return Response.status(Response.Status.OK).build();
+                }
+                else{
+                    return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+                }
             }
             else{
                 return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
@@ -57,10 +64,17 @@ public class AdminBean {
             if(!isAdmin(token)){
                 return Response.status(Response.Status.UNAUTHORIZED).build();
             }
-            PreparedStatement stmt = connection.prepareStatement("DELETE from sustain.user WHERE(id = ?);");
+            PreparedStatement stmt = connection.prepareStatement("DELETE from sustain.image_user_rating WHERE(id = ?);");
             stmt.setInt(1, userID);
             if(stmt.execute()){
-                return Response.status(Response.Status.OK).build();
+                stmt = connection.prepareStatement("DELETE from sustain.user WHERE(id = ?);");
+                stmt.setInt(1, userID);
+                if(stmt.execute()){
+                    return Response.status(Response.Status.OK).build();
+                }
+                else{
+                    return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+                }
             }
             else{
                 return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

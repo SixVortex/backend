@@ -31,6 +31,6 @@ public class ConnectionFactory {
             initialize();
             initialized = true;
         }
-        return DriverManager.getConnection("jdbc:mysql://172.17.0.1:3306/sustain?user=sustain-user&password=TcHXhv2D3y2YhmC7");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/sustain?user=sustain&password=TcHXhv2D3y2YhmC7");
     }
 }
