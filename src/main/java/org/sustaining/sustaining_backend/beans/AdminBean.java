@@ -38,21 +38,14 @@ public class AdminBean {
             if(!isAdmin(token)){
                 return Response.status(Response.Status.UNAUTHORIZED).build();
             }
-            PreparedStatement stmt = connection.prepareStatement("DELETE from sustain.image_user_rating WHERE(id = ?);");
+            PreparedStatement stmt = connection.prepareStatement("DELETE from sustain.image_user_rating WHERE(image_id = ?);");
             stmt.setInt(1, imageID);
-            if(stmt.execute()){
-                stmt = connection.prepareStatement("DELETE from sustain.image WHERE(id = ?);");
-                stmt.setInt(1, imageID);
-                if(stmt.execute()){
-                    return Response.status(Response.Status.OK).build();
-                }
-                else{
-                    return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-                }
-            }
-            else{
-                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-            }
+            stmt.executeUpdate();
+            stmt = connection.prepareStatement("DELETE from sustain.image WHERE(id = ?);");
+            stmt.setInt(1, imageID);
+            stmt.executeUpdate();
+            return Response.status(Response.Status.OK).build();
+            
         } catch (Exception e) {
             System.out.println("Error in ImageBean.deleteImage: " + e.getMessage());
         }
@@ -64,21 +57,17 @@ public class AdminBean {
             if(!isAdmin(token)){
                 return Response.status(Response.Status.UNAUTHORIZED).build();
             }
-            PreparedStatement stmt = connection.prepareStatement("DELETE from sustain.image_user_rating WHERE(id = ?);");
+            PreparedStatement stmt = connection.prepareStatement("DELETE from sustain.image_user_rating WHERE(user_id = ?);");
             stmt.setInt(1, userID);
-            if(stmt.execute()){
-                stmt = connection.prepareStatement("DELETE from sustain.user WHERE(id = ?);");
-                stmt.setInt(1, userID);
-                if(stmt.execute()){
-                    return Response.status(Response.Status.OK).build();
-                }
-                else{
-                    return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-                }
-            }
-            else{
-                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-            }
+            stmt.executeUpdate();
+            stmt = connection.prepareStatement("DELETE from sustain.user WHERE(id = ?);");
+            stmt.setInt(1, userID);
+            stmt.executeUpdate();
+            return Response.status(Response.Status.OK).build();
+            
+            
+                //return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            
         } catch (Exception e) {
             System.out.println("UserBean.getRank: " + e.getMessage());
         }
