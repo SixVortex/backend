@@ -143,6 +143,68 @@ public class PostBean {
         }
     }
 
+	/**
+     * Retrieves the all post id's
+     *
+     * @param numberOfPosts This is how many posts you want to retrieve from the
+     *                      database.
+     * @return The response to send back to the frontend.
+     */
+    public Response getPostsFameID(int numberOfPosts) {
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement("SELECT image_id FROM fame_image LIMIT ?");
+            stmt.setInt(1, numberOfPosts);
+            ResultSet data = stmt.executeQuery();
+
+            List<Integer> posts = new ArrayList();
+
+            while (data.next()) {
+                int imageID = data.getInt("image_id");
+
+                posts.add(imageID);
+            }
+            if (!posts.isEmpty()) {
+                return Response.status(Response.Status.OK).entity(posts).build();
+            } else {
+                return Response.status(Response.Status.NO_CONTENT).entity(posts).build();
+            }
+        } catch (Exception ex) {
+            System.out.println("PostBean.getPosts: " + ex.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+	}
+	
+	/**
+     * Retrieves the all post id's
+     *
+     * @param numberOfPosts This is how many posts you want to retrieve from the
+     *                      database.
+     * @return The response to send back to the frontend.
+     */
+    public Response getPostsShameID(int numberOfPosts) {
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement("SELECT image_id FROM shame_image LIMIT ?");
+            stmt.setInt(1, numberOfPosts);
+            ResultSet data = stmt.executeQuery();
+
+            List<Integer> posts = new ArrayList();
+
+            while (data.next()) {
+                int imageID = data.getInt("image_id");
+
+                posts.add(imageID);
+            }
+            if (!posts.isEmpty()) {
+                return Response.status(Response.Status.OK).entity(posts).build();
+            } else {
+                return Response.status(Response.Status.NO_CONTENT).entity(posts).build();
+            }
+        } catch (Exception ex) {
+            System.out.println("PostBean.getPosts: " + ex.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+	}
+
     /**
      * Retrieves the a specific number of posts which have a fame rating.
      *

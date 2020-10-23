@@ -80,5 +80,17 @@ public class PostResource {
     @Path("postsid/all/{numberOfPosts}")
     public Response getPostsID(@PathParam("numberOfPosts") int numberOfPosts) {
         return postBean.getPostsID(numberOfPosts);
+	}
+	
+	@GET
+    @Path("postsid/fame/{numberOfPosts}")
+    public Response getPostsFameID(@PathParam("numberOfPosts") int numberOfPosts) {
+        return postBean.getPostsFameID(numberOfPosts);
+	}
+	
+	@GET
+    @Path("postsid/shame/{numberOfPosts}")
+    public Response getPostsShameID(@PathParam("numberOfPosts") int numberOfPosts) {
+        return postBean.getPostsShameID(numberOfPosts);
     }
 }
